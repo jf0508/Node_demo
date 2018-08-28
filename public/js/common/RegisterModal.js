@@ -68,9 +68,9 @@ $.extend(RegisterModal.prototype,{
       $.getJSON("/captcha/verify", {code}, (data)=>{
        /*  console.log(data); */
         if (data.res_code === 1) {
-          $(".code-info").text("正确")
+          $(".code-info").text("正确").css({"color":"green"})
         } else {
-          $(".code-info").text("错误")
+          $(".code-info").text("错误").css({"color":"red"})
         }
       })
     },

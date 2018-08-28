@@ -6,9 +6,18 @@ const UserDao = {
         const user = new User(userinfo);
         return user.save(); // 返回
     },
-    find(){},//查询
-    update(){}, //修改
-    delete(){} //删除
+    //查询
+    find(userinfo){
+        return User.find(userinfo);
+    },
+     //修改  
+     update(userinfo){ 
+            return User.update(userinfo);
+        }, 
+     //删除
+    delete(userinfo){
+        return User.delete(userinfo);
+    } 
 };
 
 module.exports = UserDao;

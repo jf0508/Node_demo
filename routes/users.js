@@ -7,10 +7,10 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+
+//登录业务处理
   // Http://localhost:3000/users/login
-router.post("/login",function(req,res,next){
-  res.send("用户登录")
-});
+router.post("/login",UserService.login);
 
 //注册业务处理
 router.post("/register",UserService.register)

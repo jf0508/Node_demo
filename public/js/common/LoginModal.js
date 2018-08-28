@@ -56,7 +56,7 @@ $.extend(LoginModal.prototype,{
         var code = $("#login_yzm").val();
         // ajax
         $.getJSON("/captcha/verify", {code}, (data)=>{
-          console.log(data);
+          /* console.log(data); */
           if (data.res_code === 1) {
             $(".code-info").text("正确")
           } else {
