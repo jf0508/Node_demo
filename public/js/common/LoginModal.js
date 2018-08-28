@@ -24,6 +24,7 @@ LoginModal.template = `<div class="modal fade" id="login" >
                          <div class="form-group">
                                 <label for="login_yzm">验证码</label>
                                 <input type="email" class="form-control" id="login_yzm" placeholder="输入验证码">
+                                <span class="input-group-addon code-info">信息</span>
                                 <p class="help-block code-img">这是个验证码图片</p>
                         </div>
                     </form>
@@ -44,8 +45,25 @@ $.extend(LoginModal.prototype,{
 
     //注册事件监听
      addListener(){
-        $(".btn-login").on("click",this.loginHandler)
+        $(".btn-login").on("click",this.loginHandler);
+        // 失去焦点校验验证码
+      $("#login_yzm").on("blur",this.verifyHandler);
     },
+     // 校验验证码
+     verifyHandler() {
+        console.log("失去焦点");
+        // 输入的验证码
+        var code = $("#login_yzm").val();
+        // ajax
+        $.getJSON("/captcha/verify", {code}, (data)=>{
+          console.log(data);
+          if (data.res_code === 1) {
+            $(".code-info").text("正确")
+          } else {
+            $(".code-info").text("错误")
+          }
+        })
+      },
     //登录业务处理
     loginHandler(){
         var data = $(".login_form").serialize(); //通过serialize转换成 键值对

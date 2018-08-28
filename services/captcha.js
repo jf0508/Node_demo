@@ -21,11 +21,11 @@ const Captcha = {
         console.log(req.session.captcha);
 		// 与 session 中缓存的验证码比较:忽略字符大小写
         if (code.toUpperCase() === req.session.captcha.toUpperCase()) //不区分大小写
-          res.send("正确");
-			//      res.json({res_code:1, res_error: "", res_body: {valid:true}});
+          /* res.send("正确"); */
+			      res.json({res_code:1, res_error: "", res_body: {valid:true}});
         else
-         res.send("错误");
-		      //	res.json({res_code:-1, res_error: "", res_body: {valid:false}});
+        /*  res.send("错误"); */
+		    	res.json({res_code:-1, res_error: "", res_body: {valid:false}});
 
     }
 }

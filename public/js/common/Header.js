@@ -53,7 +53,7 @@ $.extend(Header.prototype,{
 	},
 	// 生成验证码
 	genCaptchaHandler() {
-    console.log("牛逼牛逼");
+    console.log("牛逼牛逼，生成了验证码");
 		$.get("/captcha/gencode", (data)=>{
 			$(".code-img").html(data);
 		}, "text");
