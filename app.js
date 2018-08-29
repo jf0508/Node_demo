@@ -9,7 +9,7 @@ const indexRouter = require('./routes/index');
 //用户系统控制路由
 const  usersRouter = require('./routes/users');
 const  captchaRouter = require('./routes/captcha.js');
-
+const  positionsRouter = require('./routes/positions.js')
 //创建express实例
 const  app = express();
 
@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));  //静态资源
 app.use('/', indexRouter); // 访问项目根下资源
 app.use('/users', usersRouter); // 访问users目录下资源
 app.use('/captcha', captchaRouter); // 访问captcha目录下资源
+app.use('/positions',positionsRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

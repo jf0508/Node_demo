@@ -8,7 +8,117 @@
 </head>
 <body>
     <div class="container header"> </div>
+    <!--  添加职位 -->
+    <div class="container">
+        <button type="button" class="btn btn-primary "  data-toggle="modal" data-target="#pos_Modal" style="float:right;margin:10px;">添加职位</button>
+      </div>
+      <!-- 添加职位模态框 -->
+      <div class="modal fade" id="pos_Modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">添加职位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="add_form"> 
+                    <div class="form-group">
+                      <label for="logo——pic">公司Logo</label>
+                      <input type="file" id="logo_pic" name="logo_pic">
+                      <p class="help-block">请上传公司的Logo</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">职位名称</label>
+                        <input type="text" class="form-control" id="position" name="name" placeholder="请填写你的职位">
+                      </div>
+                      <div class="form-group">
+                        <label for="pay">薪资</label>
+                        <input type="text" class="form-control" id="pay" name="pay" placeholder="来说出你的薪资">
+                      </div>
+                      <div class="form-group">
+                        <label for="experience">工作经验</label>
+                        <input type="text" class="form-control" id="experience" name="experience" placeholder="出来混几年了">
+                      </div>
+                      <div class="form-group">
+                        <label for="address">工作地点</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="工作地点_如实填写">
+                      </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-primary btn_add">保存 提交</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
 
+      <div class="container">
+          <table class="table table-bordered table-hover table-striped">
+              <thead>
+                  <tr>
+                      <th>序号</th>
+                      <th>公司LOGO</th>
+                      <th>职位名称</th>
+                      <th>薪资</th>
+                      <th>工作经验</th>
+                      <th>工作地点</th>
+                      <th>操作</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>1</td>
+                      <td><img src="../img/dajl.gif" style="width: 80px;height: 80px;">
+                        <img src="../img/dajl.gif" style="width: 80px;height: 80px;">
+                    </td>
+                      <td>高级前端</td>
+                      <td>600</td>
+                      <td>5年</td>
+                      <td>荷花池</td>
+                      <td>
+                          <a href="javascript:;">修改</a>
+                          <a href="javascript:;">删除</a>
+                      </td>
+                  </tr>
+                  <tr>
+                        <td>1</td>
+                        <td><img src="../img/dajl.gif" style="width: 80px;height: 80px;">
+                          <img src="../img/dajl.gif" style="width: 80px;height: 80px;">
+                      </td>
+                        <td>高级前端</td>
+                        <td>600</td>
+                        <td>5年</td>
+                        <td>荷花池</td>
+                        <td>
+                            <a href="javascript:;">修改</a>
+                            <a href="javascript:;">删除</a>
+                        </td>
+                    </tr>
+              </tbody>
+          </table>
+          <!-- 分页按钮 -->
+          <nav style="float:right">
+            <ul class="pagination">
+              <li>
+                <a href="#" aria-label="Previous">
+                  <span>&laquo;</span>
+                </a>
+              </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+              <li>
+                <a href="#" aria-label="Next">
+                  <span>&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+      </div>
+      
     <script type="text/javascript" src="/lib/Jquery/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/common/Header.js"></script>

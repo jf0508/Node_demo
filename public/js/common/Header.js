@@ -4,6 +4,7 @@ function Header() {
   this.createLoginModal();
   this.createRegisterModal();
   this.addListener();
+  this.load();
 }
 
 //头部结构局部模板
@@ -25,7 +26,7 @@ Header.template = `  <nav class="navbar navbar-inverse">
                       </ul>
                       <ul class="nav navbar-nav navbar-right login_success hide">
                        <li><a href="#">你好<span>xxxx</span></a></li>  
-                        <li><a href="/index.html">注销</a></li>                       
+                        <li><a href="javascript:;" class="login_out">注销</a></li>                       
                       </ul>
                       <ul class="nav navbar-nav navbar-right not_login">
                        <li data-toggle="modal" data-target="#login" class="link_login"><a href="#">登录</a></li>  
@@ -47,9 +48,29 @@ $.extend(Header.prototype,{
   createRegisterModal : function() {
     new RegisterModal();
   },
+  //页面加载 判断是否有用户登录
+    load(){
+      let user = sessionStorage.loginUser;
+      console.log(user)
+      if(user){ //存在该用户 登陆成功后
+        user = JSON.parse(user);
+        //console.log(user);
+        $(".login_success").removeClass("hide").find("a:first").text(`欢迎：${user.username}`);
+        $(".not_login").remove();
+      }
+    },
+
   // 注册事件监听
 	addListener() {
-		$(".link_login,.link_register").on("click", this.genCaptchaHandler)
+    //点击注册 登录按钮 生成验证码
+    $(".link_login,.link_register").on("click", this.genCaptchaHandler);
+    //点击注销
+    $(".login_out").on("click",function(){ 
+      if(confirm("真的要注销嘛？")){ //确认窗口
+      sessionStorage.removeItem("loginUser");//删除session保存的数据
+      location.href= "/index.html"; //跳转回登录主页面
+      }
+    })
 	},
 	// 生成验证码
 	genCaptchaHandler() {

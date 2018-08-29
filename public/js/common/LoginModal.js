@@ -12,14 +12,15 @@ LoginModal.template = `<div class="modal fade" id="login" >
             <h4 class="modal-title" id="myModalLabel">用户登录</h4>
           </div>
           <div class="modal-body">
+          
                       <form class="login_form"  method="POST">
                           <div class="form-group">
                             <label for="reguser">用户名</label>
-                            <input type="text" class="form-control"  placeholder="请输入用户名">
+                            <input type="text" class="form-control" name="username"  placeholder="请输入用户名">
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputPassword1">密码</label>
-                            <input type="password" class="form-control" placeholder="请输入密码">
+                            <label for="Password1">密码</label>
+                            <input type="password" class="form-control" name="password" placeholder="请输入密码">
                           </div>  
                          <div class="form-group">
                                 <label for="login_yzm">验证码</label>
@@ -28,6 +29,7 @@ LoginModal.template = `<div class="modal fade" id="login" >
                                 <p class="help-block code-img">这是个验证码图片</p>
                         </div>
                     </form>
+                    <div class="alert alert-danger hide login-err">用户名或密码错误</div>
              </div>
              <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -69,10 +71,16 @@ $.extend(LoginModal.prototype,{
         var data = $(".login_form").serialize(); //通过serialize转换成 键值对
         $.post("/users/login",data,(resData)=>{
             console.log(resData);
-        }).done(()=>{
-            $("#login").modal("hide");
-        }).done(()=>{
-            $(".login-success").removeClass("hide").siblings(".not-login").remove();   
+            if(resData.res_code === 1){ //代表登录成功
+                $("#login").modal("hide");
+                $(".login-success").removeClass("hide").siblings(".not-login").remove();
+                //保存登录成功的用户信息
+                sessionStorage.loginUser = JSON.stringify(resData.res_body);
+                //刷新界面
+                window.location.reload();
+            }else{ //登录失败 提示用户信息错误
+                $(".login-err").removeClass("hide");
+            }
         })
     }
 });
