@@ -10,6 +10,9 @@ const UserService = {
             const _pass = data[0].password; //获取数据库该用户加密的密码
             //比较密码是否正确
             if(bcrypt.compareSync(password,_pass)){ //正确
+                //用session 保存用户登录成功的信息
+                req.session.loginUser = username;
+
                 res.json({res_code:1, res_error:"", res_body: data[0]})
                 console.log(data); 
             }else{ //错误
@@ -23,6 +26,11 @@ const UserService = {
         res.json({res_code: -1, res_error: err, res_body: {}});
        })
     },
+    //注销 删除远程session的数据
+    logout(req, res, next) {
+		req.session.loginUser = null;
+		res.json({res_code:1, res_error:"", res_body:{status: true}});
+	},
 
     //注册业务
     register(req,res,next){ 

@@ -12,6 +12,9 @@ router.get('/', function(req, res, next) {
   // Http://localhost:3000/users/login
 router.post("/login",UserService.login);
 
+//退出 注销
+router.get("/logout",UserService.logout);
+
 //注册业务处理
 router.post("/register",UserService.register)
 

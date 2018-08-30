@@ -51,7 +51,7 @@ $.extend(Header.prototype,{
   //页面加载 判断是否有用户登录
     load(){
       let user = sessionStorage.loginUser;
-      console.log(user)
+      //console.log(user)
       if(user){ //存在该用户 登陆成功后
         user = JSON.parse(user);
         //console.log(user);
@@ -64,20 +64,28 @@ $.extend(Header.prototype,{
 	addListener() {
     //点击注册 登录按钮 生成验证码
     $(".link_login,.link_register").on("click", this.genCaptchaHandler);
+    
     //点击注销
-    $(".login_out").on("click",function(){ 
-      if(confirm("真的要注销嘛？")){ //确认窗口
-      sessionStorage.removeItem("loginUser");//删除session保存的数据
-      location.href= "/index.html"; //跳转回登录主页面
-      }
-    })
-	},
+    $(".login_out").on("click",this.logoutHandler)
+  },
+  
 	// 生成验证码
 	genCaptchaHandler() {
     console.log("牛逼牛逼，生成了验证码");
 		$.get("/captcha/gencode", (data)=>{
 			$(".code-img").html(data);
 		}, "text");
+  },
+  
+  //退出注销方法处理
+  logoutHandler() {
+		$.getJSON("/users/logout", (data)=>{
+			if (data.res_body.status){
+        if(confirm("真的要注销嘛？")){ 
+				sessionStorage.removeItem("loginUser");
+				location.href = "/";}
+			}
+		})
 	}
 
 });

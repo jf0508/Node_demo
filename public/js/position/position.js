@@ -15,19 +15,19 @@ function Position(){
             <td><%= positions[i].experience %></td>
              <td><%= positions[i].address %></td>
              <td>
-                <a href="javascript:;">修改</a>
-                 <a href="javascript:;">删除</a>
+                <a href="javascript:;" class="position_update">修改</a>
+                 <a href="javascript:;" class="position_delete">删除</a>
              </td>
                   </tr>
         <% } %>`;
 
     //分页按钮模板
     Position.pageTamplate = `
-    <li><a href="#"> <span>&laquo;</span></a></li>
+    <li class="disabled"><a href="javascript:;" class="left_btn"  disabled="disabled"> <span>&laquo;</span></a></li>
         <% for(var i =1; i<=totalPages; i++){ %>
        <li class="<%= currentPage == i ? 'active' : '' %>"><a href="#"><%= i %></a></li>
 	<% } %>
-     <li><a href="#"> <span>&raquo;</span> </a></li>
+     <li class="disabled" ><a href="javascript:;" disabled="disabled"> <span class="right_btn">&raquo;</span> </a></li>
     `
     $.extend(Position.prototype,{
     loadHeader:function(){
@@ -39,19 +39,21 @@ function Position(){
     addListener(){
         //添加职位
         $(".btn_add").on("click",this.addPositionHandler);
-        // 翻页
-		$(".pagination").on("click", "li", this.loadByPage);
+        // 点击页码翻页
+        $(".pagination").on("click", "li", this.loadByPage);
+        //点击左右按钮翻页
+       /*  $(".left_btn").delegate("span","click",function(){
+            console.log("向前")
+        }) 
+        $(".right_btn").click(function(){
+            console.log("this")
+        });*/
+        $("tbody").delegate(".position_delete","click",function(){
+            $(this).parents("tr").remove();
+        })
     }, 
 
     load(){ //页面加载第一页信息
-       /*  $.getJSON("/positions/list",data=>{
-            //待渲染的数据
-            const positions = data.res_body.data;
-            //EJS模板引擎
-            const html = ejs.render(Position.listInfoTemplate,{positions});
-            //添加渲染到页面中
-            $(".list_table tbody").html(html);
-        }); */
         this.loadByPage(1);
     },
 
@@ -61,7 +63,7 @@ function Position(){
 		if (typeof event === "number") // 直接传递页码
 			page = event;
 		else { // 获取待加载页码			
-			console.log(event.target)
+			//console.log(event.target)
 			page = $(event.target).text();
 		}
 

@@ -76,8 +76,10 @@ $.extend(LoginModal.prototype,{
                 $(".login-success").removeClass("hide").siblings(".not-login").remove();
                 //保存登录成功的用户信息
                 sessionStorage.loginUser = JSON.stringify(resData.res_body);
-                //刷新界面
-                window.location.reload();
+                //登录成功后跳转到职位管理界面
+                location.href = "/html/position.html"
+                //window.location.reload();
+
             }else{ //登录失败 提示用户信息错误
                 $(".login-err").removeClass("hide");
             }

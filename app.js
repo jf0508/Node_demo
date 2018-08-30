@@ -30,7 +30,23 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 45*60*1000 }
 }));
+
+app.use(function(req,res,next){
+  //获取请求的url
+  const {url} = req;
+  // 判断
+  if (url.indexOf("/position") !== -1) {
+    // 获取在 session 中保存的登录用户信息
+    const user = req.session.loginUser;
+    if (!user) {
+      res.redirect("/"); //页面重定向 返回主页
+      return false;
+    }
+  }
+  next();
+});
  
+//静态资源
 app.use(express.static(path.join(__dirname, 'public')));  //静态资源
 
 
