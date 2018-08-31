@@ -23,6 +23,12 @@ const upload = multer({storage});
 //添加职位
 router.post("/add",upload.single("logo_pic"),PositionService.add);
 
+//删除职位
+router.get("/del",PositionService.del);
+
+//修改职位
+router.post("/update",PositionService.Position_update);
+
 //查询 localhost:3000/positions/list?page=?
 router.get("/list",PositionService.listByPage);
 

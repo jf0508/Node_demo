@@ -52,6 +52,47 @@
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
+    <!-- *************************************** 修改模态 ************************************* -->
+      <!-- 修改职位模态框 -->
+      <div class="modal fade" id="up_Modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">修改职位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="up_form"> 
+                    <div class="form-group">
+                      <label for="logo——pic">公司Logo</label>
+                      <input type="file" class="form-control" id="uplogo_pic" name="uplogo_pic">
+                      <p class="help-block">请重新上传公司的Logo</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="upposition">职位名称</label>
+                        <input type="text" class="form-control" id="upposition" name="upname" placeholder="请修改你的职位">
+                      </div>
+                      <div class="form-group">
+                        <label for="uppay">薪资</label>
+                        <input type="text" class="form-control" id="uppay" name="uppay" placeholder="来修改你的薪资">
+                      </div>
+                      <div class="form-group">
+                        <label for="upexperience">工作经验</label>
+                        <input type="text" class="form-control" id="upexperience" name="upexperience" placeholder="再说说出来混几年了">
+                      </div>
+                      <div class="form-group">
+                        <label for="upaddress">工作地点</label>
+                        <input type="text" class="form-control" id="upaddress" name="upaddress" placeholder="工作地点_修改填写">
+                      </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-primary btn_add">提交修改</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
 
       <div class="container">
           <table class="table table-bordered table-hover table-striped list_table">

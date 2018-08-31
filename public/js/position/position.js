@@ -8,6 +8,7 @@ function Position(){
     Position.listInfoTemplate = `
     <% for (var i = 0; i < positions.length; i++) { %> 
         <tr>
+
             <td><%= i+1 %></td>
             <td><img src="../img/upload/<%=positions[i].logo_pic%>" style="width: 80px;height: 80px;"></td>
             <td><%= positions[i].name %></td>
@@ -15,8 +16,8 @@ function Position(){
             <td><%= positions[i].experience %></td>
              <td><%= positions[i].address %></td>
              <td>
-                <a href="javascript:;" class="position_update">修改</a>
-                 <a href="javascript:;" class="position_delete">删除</a>
+                <button type="button" class="position_update btn btn-success" data-toggle="modal" data-target="#up_Modal"  data-id="<%=positions[i]._id %>" style="margin-left:10px">修改</button>
+                 <button type="button" class="position_delete btn btn-danger" data-id="<%=positions[i]._id %>">删除</button>
              </td>
                   </tr>
         <% } %>`;
@@ -48,9 +49,20 @@ function Position(){
         $(".right_btn").click(function(){
             console.log("this")
         });*/
+        
+        //删除
         $("tbody").delegate(".position_delete","click",function(){
             $(this).parents("tr").remove();
+            const _id = $(this).data("id");
+            $.getJSON("/positions/del?id="+_id,function(data){
+               console.log(data) 
+               //data.res_body.id
+            })
         })
+
+        //修改职位
+        $(".position_update").on("click",this.upPositionHandler);
+        
     }, 
 
     load(){ //页面加载第一页信息
@@ -98,6 +110,26 @@ function Position(){
 			success: function(data){
                 //console.log(data);
                 $("#pos_Modal").modal("hide");
+                window.location.reload();
+			},
+			dataType: "json"
+        })
+       
+    },
+       //添加职位事件
+        upPositionHandler(){
+        const formData = new FormData($(".up_form").get(0));
+        console.log(formData);
+        // 使用 $.ajax() 方法
+		$.ajax({
+			type: "post",
+			url: "/positions/update",
+			data: formData,
+			processData: false, // 禁止将 data 转换为查询字符串
+			contentType: false, // 不设置contentType
+			success: function(data){
+                //console.log(data);
+                $("#up_Modal").modal("hide");
                 window.location.reload();
 			},
 			dataType: "json"

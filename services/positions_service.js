@@ -19,6 +19,26 @@ const PositionService = {
         });
      },
 
+     //删除操作
+     del(req,res,next){
+        let {id} = req.query;
+        PositionDao.delete(id).then(idData=>{
+            res.json({res_code:1,res_error:"",res_body:{id:idData}})
+        }).catch(err=>{
+            res.json({res_code:1,res_error:err,res_body:""})
+        })
+     },
+
+    //修改操作
+     Position_update(req,res,next){
+        let {id} = req.query;
+        PositionDao.update(id).then(idData=>{
+            res.json({res_code:1,res_error:"",res_body:{id:idData}})
+        }).catch(err=>{
+            res.json({res_code:1,res_error:err,res_body:""})
+        })
+     },
+
      //分页查询
     listByPage(req,res,next){
         let {page} = req.query;
