@@ -16,12 +16,17 @@ const PositionDao = {
 		//查询
 		return Position.find().skip((page-1)*pageSize).limit(pageSize);
 	},
-	update(up) {
-		//修改
-		return Position.update({_id:up});
+	update(positionInfo) {
+		//根据ID修改
+		return Position.findByIdAndUpdate(positionInfo._id,{$set:positionInfo},{new:true});
 	},
-	find() {
-
+	find(proinfo) {
+		//查找
+		return Position.findById(proinfo)
+	},
+		//根据ID查找
+	findid(id){
+		return Position.findById(id);
 	},
 	delete(del) {
 		//删除

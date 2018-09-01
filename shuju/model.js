@@ -14,7 +14,7 @@ const User = mongoose.model("user", {
 const Position = mongoose.model("positions",{
 	logo_pic:String,
 	name: String,
-	pay: Number,
+	pay: String,
 	experience: String,
 	address: String
 })

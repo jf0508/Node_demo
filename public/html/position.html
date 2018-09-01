@@ -62,33 +62,34 @@
               <h4 class="modal-title">修改职位</h4>
             </div>
             <div class="modal-body">
-                <form class="up_form"> 
+                <form class="up_form">
+                  <input type="text" style="display:none" id="up_id" name="_id"> 
                     <div class="form-group">
-                      <label for="logo——pic">公司Logo</label>
-                      <input type="file" class="form-control" id="uplogo_pic" name="uplogo_pic">
+                      <label for="uplogo——pic">公司Logo</label>
+                      <input type="file" class="form-control" id="uplogo_pic" name="logo_pic">
                       <p class="help-block">请重新上传公司的Logo</p>
                     </div>
                     <div class="form-group">
                         <label for="upposition">职位名称</label>
-                        <input type="text" class="form-control" id="upposition" name="upname" placeholder="请修改你的职位">
+                        <input type="text" class="form-control" id="upposition" name="name" placeholder="请修改你的职位">
                       </div>
                       <div class="form-group">
                         <label for="uppay">薪资</label>
-                        <input type="text" class="form-control" id="uppay" name="uppay" placeholder="来修改你的薪资">
+                        <input type="text" class="form-control" id="uppay" name="pay" placeholder="来修改你的薪资">
                       </div>
                       <div class="form-group">
                         <label for="upexperience">工作经验</label>
-                        <input type="text" class="form-control" id="upexperience" name="upexperience" placeholder="再说说出来混几年了">
+                        <input type="text" class="form-control" id="upexperience" name="experience" placeholder="再说说出来混几年了">
                       </div>
                       <div class="form-group">
                         <label for="upaddress">工作地点</label>
-                        <input type="text" class="form-control" id="upaddress" name="upaddress" placeholder="工作地点_修改填写">
+                        <input type="text" class="form-control" id="upaddress" name="address" placeholder="工作地点_修改填写">
                       </div>
                     </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-              <button type="button" class="btn btn-primary btn_add">提交修改</button>
+              <button type="button" class="btn btn-primary btn_update">提交修改</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

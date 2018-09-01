@@ -29,16 +29,37 @@ const PositionService = {
         })
      },
 
-    //修改操作
+
+    //根据id修改操作
      Position_update(req,res,next){
-        let {id} = req.query;
-        PositionDao.update(id).then(idData=>{
-            res.json({res_code:1,res_error:"",res_body:{id:idData}})
-        }).catch(err=>{
+        let info = {_id,name,pay,experience,address} = req.body;  
+                //保存Logo文件 单独处理文件
+                let logo_pic = "";
+                if(req.file){
+                    logo_pic = req.file.filename;  
+                    info = {_id,logo_pic,name,pay,experience,address}  
+                }
+                  
+        //保存到数据库
+        PositionDao.update(info).then(data=>{
+            res.json({res_code:1, res_error:"", res_body: data})
+            
+        })
+        .catch(err=>{
+            res.json({res_code:-1, res_error:err, res_body: {}})
+        });
+     },
+
+
+     //根据id查找
+     find(req,res,next){
+         let {id}=req.query;
+         PositionDao.findid(id).then(data=>{
+             res.json({res_code:1,res_err:"",res_body:{data}})
+         }).catch(err=>{
             res.json({res_code:1,res_error:err,res_body:""})
         })
      },
-
      //分页查询
     listByPage(req,res,next){
         let {page} = req.query;

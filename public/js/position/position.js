@@ -49,6 +49,7 @@ function Position(){
         $(".right_btn").click(function(){
             console.log("this")
         });*/
+        $(".btn_update").on("click",this.upPositionHandler )
         
         //删除
         $("tbody").delegate(".position_delete","click",function(){
@@ -60,10 +61,55 @@ function Position(){
             })
         })
 
-        //修改职位
-        $(".position_update").on("click",this.upPositionHandler);
+        //渲染修改模态框
+        $("tbody").on("click",".position_update",function(data){
+            console.log($(this))
+            const _id = $(this).data("id");
+             //根据id查找商品
+             $.getJSON("/positions/find?id="+_id,data=>{
+                if(data.res_code===1){
+                    data = data.res_body.data;
+                    //修改模态框渲染数据
+                    $(".up_form").find("#up_id").val(data._id);
+                    $(".up_form").find("#upposition").val(data.name);
+                    $(".up_form").find("#uppay").val(data.pay);
+                    $(".up_form").find("#upexperience").val(data.experience);
+                    $(".up_form").find("#upaddress").val(data.address);
+                }
+                else{
+                    err();
+                }
+            })
+        });
         
     }, 
+
+      //修改职位事件
+        upPositionHandler(){
+                //发送ajax请求
+                const formData = new FormData($(".up_form").get(0));
+                //ajax请求
+                $.ajax({
+                    type:"post",
+                    url:"/positions/update",
+                    data:formData,
+                    processData: false, // 禁止将 data 转换为查询字符串
+                    contentType: false, // 不设置contentType
+                    success:function(data){
+                        console.log(data);
+                        if(data.res_code===1){
+                            //关闭模态框
+                            $("#up_Modal").modal('hide')
+                            window.location.reload(); //界面刷新
+                        }  
+                        else{
+                            alert("修改失败");
+                        }
+                    },
+                    dataType:"json"
+                });
+    },
+
 
     load(){ //页面加载第一页信息
         this.loadByPage(1);
@@ -116,26 +162,7 @@ function Position(){
         })
        
     },
-       //添加职位事件
-        upPositionHandler(){
-        const formData = new FormData($(".up_form").get(0));
-        console.log(formData);
-        // 使用 $.ajax() 方法
-		$.ajax({
-			type: "post",
-			url: "/positions/update",
-			data: formData,
-			processData: false, // 禁止将 data 转换为查询字符串
-			contentType: false, // 不设置contentType
-			success: function(data){
-                //console.log(data);
-                $("#up_Modal").modal("hide");
-                window.location.reload();
-			},
-			dataType: "json"
-        })
-       
-    }
+ 
 });
 
 new Position();

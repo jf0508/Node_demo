@@ -26,10 +26,13 @@ router.post("/add",upload.single("logo_pic"),PositionService.add);
 //删除职位
 router.get("/del",PositionService.del);
 
-//修改职位
-router.post("/update",PositionService.Position_update);
+//根据id修改职位
+router.post("/update",upload.single("logo_pic"),PositionService.Position_update);
 
-//查询 localhost:3000/positions/list?page=?
+//根据id查询
+router.get("/find",PositionService.find);
+
+//查询分页 localhost:3000/positions/list?page=?
 router.get("/list",PositionService.listByPage);
 
 //导出
